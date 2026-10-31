@@ -1,0 +1,17 @@
+name: Template integration tests
+
+on:
+  push:
+    branches: [installable_imrad_project_cookiecutter]
+  pull_request:
+    branches: [installable_imrad_project_cookiecutter]
+
+permissions:
+  contents: read
+
+jobs:
+  integration:
+    uses: adamjpatterson/the-data-science-project/.github/workflows/integration.yml@main
+    with:
+      template_branch: installable_imrad_project_cookiecutter
+      template_ref: ${{ github.sha }}

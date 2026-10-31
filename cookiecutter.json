@@ -1,0 +1,21 @@
+{
+    "project_name": "project",
+    "package_name": "package",
+    "repository_url": "https://github.com/pypa/sampleproject",
+    "package_description": "A small example package",
+    "author_name": "Example Author",
+    "author_email": "author@example.com",
+    "include_agents_md": [
+        "yes",
+        "no"
+    ],
+    "__prompts__": {
+        "project_name": "Project directory name",
+        "package_name": "Python package name",
+        "repository_url": "Repository URL",
+        "package_description": "Package description",
+        "author_name": "Author name",
+        "author_email": "Author email",
+        "include_agents_md": "Include AGENTS.md guidance?"
+    }
+}
