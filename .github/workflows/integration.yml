@@ -1,0 +1,78 @@
+name: Project integration tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '0 9 * * 1'
+  workflow_call:
+    inputs:
+      template_branch:
+        required: true
+        type: string
+      template_ref:
+        required: true
+        type: string
+
+jobs:
+  integration:
+    name: Generated projects on Python ${{ matrix.python }}
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        python: ['3.8', '3.11', '3.13', '3.14']
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.template_branch != '' && 'main' || github.sha }}
+          fetch-depth: 0
+      - name: Check out the triggering template commit
+        if: inputs.template_branch != ''
+        uses: actions/checkout@v7
+        with:
+          ref: ${{ inputs.template_ref }}
+          path: .ci-template
+      - name: Install target Python
+        id: target
+        uses: actions/setup-python@v7
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install test-runner Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.11'
+          cache: pip
+          cache-dependency-path: tests/requirements.txt
+      - name: Export exact template sources
+        env:
+          TEMPLATE_BRANCH: ${{ inputs.template_branch }}
+        run: |
+          git fetch origin installable_imrad_project_cookiecutter:refs/remotes/origin/installable_imrad_project_cookiecutter imrad_project_cookiecutter:refs/remotes/origin/imrad_project_cookiecutter
+          sources="$RUNNER_TEMP/project-test-sources"
+          mkdir -p "$sources"
+          case "$TEMPLATE_BRANCH" in
+            ''|installable_imrad_project_cookiecutter|imrad_project_cookiecutter) ;;
+            *) echo "Unknown template branch: $TEMPLATE_BRANCH" >&2; exit 1 ;;
+          esac
+          for branch in installable_imrad_project_cookiecutter imrad_project_cookiecutter; do
+            mkdir -p "$sources/$branch"
+            if [ "$branch" = "$TEMPLATE_BRANCH" ]; then
+              git -C .ci-template rev-parse HEAD
+              git -C .ci-template archive HEAD | tar -x -C "$sources/$branch"
+            else
+              git rev-parse "refs/remotes/origin/$branch"
+              git archive "refs/remotes/origin/$branch" | tar -x -C "$sources/$branch"
+            fi
+          done
+          echo "PROJECT_TEST_SOURCES=$sources" >> "$GITHUB_ENV"
+      - run: python -m pip install -r tests/requirements.txt
+      - run: python -m pytest -v tests
+        env:
+          PROJECT_TEST_PYTHON: ${{ steps.target.outputs.python-path }}
