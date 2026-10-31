@@ -13,14 +13,14 @@ Share the study on GitHub, including documentation and shareable data or data
 retrieval instructions. See the generated README and the
 [project introduction](https://github.com/adamjpatterson/the-data-science-project/blob/main/INTRODUCTION.md).
 
-## Release 1.0.0
+## Release 1.0.1
 
 ```bash
 python -m pip install cookiecutter
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.0.0
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.0.1
 ```
 
-These commands select the fixed 1.0.0 release. This branch contains ongoing development.
+These commands select the fixed 1.0.1 release. This branch contains ongoing development.
 
 ## Optional AI guidance
 

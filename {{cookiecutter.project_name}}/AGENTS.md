@@ -1,47 +1,23 @@
-# Working on this study
+# Project layout
 
-This is an IMRaD-like project for data science and statistical analysis. Read the
-root README and the relevant directory READMEs for the study's purpose and
-existing conventions before extending it.
+This study uses an IMRaD-like layout:
 
-## Organization
+- `materials/`: inputs and supporting materials, including datasets and models.
+- `methods/`: analysis procedures, notebooks, and reusable code.
+- `results/`: outputs of the analysis, including datasets, figures, and models.
 
-- `materials/`: source data, supporting materials, intermediate datasets, and
-  models consumed by the analysis.
-- `methods/`: procedures, notebooks, and reusable Python code.
-- `results/`: products of the analysis, including datasets, figures, and models.
+The contents and subdirectories depend on the study.
 
-Organize subdirectories to suit the study; no fixed data or model taxonomy is
-required. Preserve original inputs and make transformations traceable through
-code. Describe the study's question and interpretation in the root README.
+## Python package and notebook
 
-## Python code and workspace paths
+`methods/main.ipynb` is the starter notebook. The Python package is in
+`methods/{{cookiecutter.package_name}}/`; `utils.py` starts empty for reusable functions.
 
-Put reusable Python code in `methods/{{cookiecutter.package_name}}/` and notebooks
-in `methods/`. From the project root, install the package into the
-working environment with `python -m pip install -e .`. Use that environment for
-notebooks and scripts. Declare dependencies in `pyproject.toml`.
+An editable installation (`python -m pip install -e .` from the project root)
+makes `{{cookiecutter.package_name}}` importable from the study's source code.
+The package's `__init__.py` defines `PROJECT_ROOT`, `MATERIALS_PATH`,
+`METHODS_PATH`, and `RESULTS_PATH` relative to this layout. These constants do
+not create or validate directories.
 
-Import `PROJECT_ROOT`, `MATERIALS_PATH`, `METHODS_PATH`, and `RESULTS_PATH` from
-`{{cookiecutter.package_name}}`. These constants are defined in `__init__.py` relative to
-this source layout. They do not create or validate directories. Use an editable
-installation so imports refer to this study's source code. Put reusable functions
-in `utils.py` or other package modules.
-
-## Running and sharing the analysis
-
-The `main()` function in `methods/{{cookiecutter.package_name}}/__main__.py` starts empty.
-Run it with `python -m {{cookiecutter.package_name}}` after adding workflow steps.
-The study author chooses any command-line arguments and file locations.
-Run notebooks separately unless the study adds notebook execution to its workflow.
-
-Share the complete study through its GitHub repository. Document dependency
-installation, how to obtain data, and how to reproduce the analysis. Readers
-clone the repository and run `python -m pip install -e .` in its root.
-
-## Checking changes
-
-Run the affected analysis steps and any existing checks in the intended
-environment. Record the commands used and distinguish results actually verified
-from steps that could not be run. Keep outputs traceable to their inputs and
-methods, and explain analytical assumptions in the study documentation.
+`python -m {{cookiecutter.package_name}}` calls `main()` in the package's `__main__.py`.
+The starter function is empty; no analysis or notebook execution is predefined.
