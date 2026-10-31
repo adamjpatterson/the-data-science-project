@@ -234,8 +234,7 @@ This template asks only for the project directory name and optional AI guidance:
     Choose from [1/2] (1):
 ```
 
-Open `methods/main.ipynb` with `methods` as the working directory. Its first cell uses `pathlib` to define absolute paths to the project root and its three
-directories; no package installation is needed.
+Open `methods/main.ipynb` with `methods` as the working directory. Its first cell uses `pathlib` to define absolute paths to the project root and its three directories; no package installation is needed.
 
 ## Data science and statistical analysis with AI assistance
 
@@ -306,18 +305,11 @@ This template has no installable Python package or predefined pipeline.
 
 ## Release
 
-The template release is **1.0.1**. Use the commands above to create a study from
-that fixed release. Once generated, your study is yours to edit and develop;
-you do not need to switch template branches.
+The template release is **1.0.1**. Use the Cookiecutter commands above to create a study from that fixed release.
 
-For contributors working on the templates themselves,
-`installable_imrad_project_cookiecutter` contains the installable template and
-`imrad_project_cookiecutter` contains the simpler template. These branches hold
-the latest template changes, which may not yet be released. The `main` branch
-contains the shared documentation and tests.
+For contributors working on the templates themselves, `installable_imrad_project_cookiecutter` contains the installable template and `imrad_project_cookiecutter` contains the simpler template. These branches hold the latest template changes, which may not yet be released. The `main` branch contains the shared documentation and tests.
 
-Generated packages have their own version, initially `0.0.1` in `__about__.py`.
-Study authors manage that version independently of the template release.
+Generated packages have their own version, initially `0.0.1` in `__about__.py`. Study authors manage that version independently of the template release.
 
 ## Development checks
 
