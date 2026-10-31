@@ -306,10 +306,15 @@ This template has no installable Python package or predefined pipeline.
 
 ## Release
 
-The template release is **1.0.1**. The commands above select its fixed release
-tags. For ongoing development, use the `installable_imrad_project_cookiecutter`
-or `imrad_project_cookiecutter` branch instead. The two templates live on
-independent branches; `main` contains shared documentation and tests.
+The template release is **1.0.1**. Use the commands above to create a study from
+that fixed release. Once generated, your study is yours to edit and develop;
+you do not need to switch template branches.
+
+For contributors working on the templates themselves,
+`installable_imrad_project_cookiecutter` contains the installable template and
+`imrad_project_cookiecutter` contains the simpler template. These branches hold
+the latest template changes, which may not yet be released. The `main` branch
+contains the shared documentation and tests.
 
 Generated packages have their own version, initially `0.0.1` in `__about__.py`.
 Study authors manage that version independently of the template release.
