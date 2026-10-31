@@ -77,20 +77,20 @@ its callers on the template branches.
 </details>
 
 <details>
-<summary>Test release 1.0.0</summary>
+<summary>Test release 1.0.1</summary>
 
 In a separate clone, run the following from the repository root on Linux or
 macOS, with `python` selecting Python 3.11.4 or newer. The release dependency file is `tests/requirements.txt`.
 
 ```bash
 git fetch origin --tags
-git checkout v1.0.0
+git checkout v1.0.1
 python -m venv /tmp/data-science-project-release-tests
 /tmp/data-science-project-release-tests/bin/python -m pip install -r tests/requirements.txt
 release_sources=$(mktemp -d)
 mkdir "$release_sources/installable_imrad_project_cookiecutter" "$release_sources/imrad_project_cookiecutter"
-git archive installable-imrad-project-v1.0.0 | tar -x -C "$release_sources/installable_imrad_project_cookiecutter"
-git archive imrad-project-v1.0.0 | tar -x -C "$release_sources/imrad_project_cookiecutter"
+git archive installable-imrad-project-v1.0.1 | tar -x -C "$release_sources/installable_imrad_project_cookiecutter"
+git archive imrad-project-v1.0.1 | tar -x -C "$release_sources/imrad_project_cookiecutter"
 PROJECT_TEST_SOURCES="$release_sources" /tmp/data-science-project-release-tests/bin/python -m pytest -v tests
 ```
 
