@@ -1,0 +1,11 @@
+{
+    "project_name": "project",
+    "include_agents_md": [
+        "yes",
+        "no"
+    ],
+    "__prompts__": {
+        "project_name": "Project directory name",
+        "include_agents_md": "Include AGENTS.md guidance?"
+    }
+}
