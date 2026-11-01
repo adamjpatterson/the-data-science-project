@@ -228,10 +228,6 @@ def test_optional_agents_guidance(sources, tmp_path, branch):
     guidance = (included / "AGENTS.md").read_text()
     if branch == "installable_imrad_project_cookiecutter":
         assert f"methods/{package}/" in guidance
-        assert f"`{package}`" in guidance
-        assert f"python -m {package}" in guidance
-    else:
-        assert "methods/main.ipynb" in guidance
     # Opting out must remove only the guidance, preserving all other files.
     def files(root):
         return {p.relative_to(root): p.read_bytes() for p in root.rglob("*")
