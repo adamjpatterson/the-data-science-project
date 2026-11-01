@@ -4,13 +4,13 @@ Create a project with `materials`, `methods`, and `results` directories. Organiz
 their contents to suit your study; no particular data or output categories are
 required. This layout does not include an installable Python package.
 
-## Release 1.0.1
+## Release 1.0.2
 
-These commands select the fixed 1.0.1 release. This branch contains ongoing development.
+These commands select the fixed 1.0.2 release. This branch contains ongoing development.
 
 ```bash
 python -m pip install cookiecutter
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout imrad-project-v1.0.1
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout imrad-project-v1.0.2
 ```
 
 Open the generated `methods/main.ipynb` with `methods` as the working directory.
