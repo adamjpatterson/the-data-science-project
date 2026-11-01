@@ -88,7 +88,7 @@ python -m pip install cookiecutter
 Use the Cookiecutter to create an installable IMRaD-like project.
 
 ```bash
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.0.1
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.0.2
 ```
 
 The form lets you configure the project directory, Python package, repository URL, description, and author information:
@@ -221,7 +221,7 @@ python -m pip install cookiecutter
 Use the Cookiecutter to create an IMRaD-like project.
 
 ```bash
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout imrad-project-v1.0.1
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout imrad-project-v1.0.2
 ```
 
 This template asks only for the project directory name and optional AI guidance:
@@ -262,7 +262,7 @@ The contents and subdirectories depend on the study.
 
 ## Python package
 
-The Python package is in `methods/{{cookiecutter.package_name}}/`
+The Python package is in `methods/package/`
 ```
 
 </details>
@@ -286,7 +286,7 @@ The contents and subdirectories depend on the study.
 
 ## Release
 
-The template release is **1.0.1**. Use the Cookiecutter commands above to create a study from that fixed release.
+The template release is **1.0.2**. Use the Cookiecutter commands above to create a study from that fixed release.
 
 For contributors working on the templates themselves, `installable_imrad_project_cookiecutter` contains the installable template and `imrad_project_cookiecutter` contains the simpler template. These branches hold the latest template changes, which may not yet be released. The `main` branch contains the shared documentation and tests.
 
