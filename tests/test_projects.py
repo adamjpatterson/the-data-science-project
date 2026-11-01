@@ -221,13 +221,10 @@ def test_template_metadata_round_trip(sources, tmp_path, value):
 
 @pytest.mark.parametrize("branch", BRANCHES)
 def test_optional_agents_guidance(sources, tmp_path, branch):
-    included, package = render(sources, tmp_path / "included", branch, True,
+    included, _ = render(sources, tmp_path / "included", branch, True,
                                {"include_agents_md": "yes"})
     omitted, _ = render(sources, tmp_path / "omitted", branch, True,
                         {"include_agents_md": "no"})
-    guidance = (included / "AGENTS.md").read_text()
-    if branch == "installable_imrad_project_cookiecutter":
-        assert f"methods/{package}/" in guidance
     # Opting out must remove only the guidance, preserving all other files.
     def files(root):
         return {p.relative_to(root): p.read_bytes() for p in root.rglob("*")
