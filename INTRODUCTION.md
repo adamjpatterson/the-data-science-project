@@ -72,7 +72,9 @@ You can [create an installable project using the Cookiecutter](#create-an-instal
     │
     ├── pyproject.toml ⬅ Configure your package and its dependencies here.
     │
-    └── README.md ⬅ Put your Introduction and Discussion here.
+    ├── README.md ⬅ Put your Introduction and Discussion here.
+    │
+    └── .gitignore
 ```
 
 The default Python package name is `package`. You can specify a different package name using the [Cookiecutter](#create-an-installable-imrad-like-project-using-the-cookiecutter).
