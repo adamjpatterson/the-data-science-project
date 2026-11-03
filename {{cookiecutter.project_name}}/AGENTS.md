@@ -10,4 +10,4 @@ The contents and subdirectories depend on the study.
 
 ## Python package
 
-The Python package is in `methods/{{cookiecutter.package_name}}/`
+The Python package in `methods/{{cookiecutter.package_name}}/` contains reusable code for the study, which can be imported by notebooks and other analysis code.
