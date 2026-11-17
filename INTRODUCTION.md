@@ -116,7 +116,7 @@ Press Enter to accept each displayed default or enter a custom value. Project di
 
 #### Optional utilities module
 
-The "Include utils.py?" option (`include_utils`) defaults to `yes`. Select `no` to omit `utils.py` and its import from the starter notebook. You can add your own Python modules to the package at any time.
+It is a common convention to collect helper functions for an analysis in a utilities module. The optional `utils.py` starter module follows this convention. The "Include utils.py?" option (`include_utils`) defaults to `yes`. Select `no` to omit `utils.py` and its import from the starter notebook. You can add your own Python modules to the package at any time.
 
 #### Install the package
 
