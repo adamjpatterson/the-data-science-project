@@ -41,6 +41,8 @@ You can [create an installable project using the Cookiecutter](#create-an-instal
 
 #### The directory structure looks like this.
 
+The directory tree below reflects development toward **1.0.4**, which moves `__about__.py` from the study root into `methods/<package_name>/`. The fixed 1.0.3 commands still generate the file at the study root.
+
 ```text
 ├── project ⬅ This is the project directory. Choose a name for your project.
     │
@@ -291,8 +293,6 @@ The contents and subdirectories depend on the study.
 The current published template release is **1.0.3**. Use the Cookiecutter commands above to create a study from that fixed release.
 
 For contributors working on the templates themselves, `installable_imrad_project_cookiecutter` contains the installable template and `imrad_project_cookiecutter` contains the simpler template. These branches hold the latest template changes, which may not yet be released. The `main` branch contains the shared documentation and tests.
-
-The directory tree above reflects development toward **1.0.4**, which moves `__about__.py` from the study root into `methods/<package_name>/`. The fixed 1.0.3 commands still generate the file at the study root.
 
 Generated packages have their own version, initially `0.0.1` in `__about__.py`. Study authors manage that version independently of the template release.
 
