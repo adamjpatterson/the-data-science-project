@@ -144,10 +144,14 @@ assert Path({package}.__file__).resolve().parent == Path(sys.argv[2]).resolve()
 """, project, code_dir, cwd=cwd, env=env)
 
 
-@pytest.mark.parametrize("variant", ["defaults", "custom-names"])
+@pytest.mark.parametrize("variant", ["defaults", "custom-names", "without-utils"])
 def test_installable_distribution(sources, tmp_path, variant):
     project, package = render(sources, tmp_path, "installable_imrad_project_cookiecutter",
-                              variant == "custom-names")
+                              variant != "defaults",
+                              {"include_utils": "no", "include_agents_md": "no"}
+                              if variant == "without-utils" else None)
+    include_utils = variant != "without-utils"
+    assert (project / "methods" / package / "utils.py").is_file() == include_utils
     stale_wheel = project / "dist/previous-0.0.0-py3-none-any.whl"
     stale_wheel.parent.mkdir()
     stale_wheel.write_bytes(b"previous build artifact")
@@ -188,6 +192,7 @@ def test_installable_distribution(sources, tmp_path, variant):
         assert f"{package}/__init__.py" in names
         assert f"{package}/__main__.py" in names
         assert f"{package}/__about__.py" in names
+        assert (f"{package}/utils.py" in names) == include_utils
         version_source = archive.read(f"{package}/__about__.py").decode()
         metadata_name, = (name for name in names if name.endswith(".dist-info/METADATA"))
         metadata = Parser().parsestr(archive.read(metadata_name).decode())
@@ -206,8 +211,8 @@ def test_installable_distribution(sources, tmp_path, variant):
     source_code = project / "methods" / package
     assert_paths(python, env, outside, package, project, source_code)
     # A utility added by the study author is importable without path manipulation.
-    (source_code / "utils.py").write_text("def double(value):\n    return value * 2\n")
-    run(python, "-c", f"from {package} import utils; assert utils.double(21) == 42",
+    (source_code / "analysis.py").write_text("def double(value):\n    return value * 2\n")
+    run(python, "-c", f"from {package} import analysis; assert analysis.double(21) == 42",
         cwd=outside, env=env)
     execute_notebook(python, env, project / "methods/main.ipynb", outside, project)
     assert run(python, "-m", package, cwd=outside, env=env) == ""

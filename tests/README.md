@@ -5,7 +5,8 @@ branches and `main`. It also runs weekly and can be started manually on `main`.
 It renders projects, executes notebooks, verifies editable imports and source-layout
 paths, and checks that package archives include the package version module
 and exclude study files. Tests also cover
-custom names, metadata escaping, and optional `AGENTS.md` guidance.
+custom names, metadata escaping, optional `AGENTS.md` guidance, and running
+the installable project without the optional `utils.py` module.
 
 The test runner uses Python 3.11; generated projects are built, installed, and
 executed in fresh environments using Python 3.8, 3.11, 3.13, and 3.14 on Ubuntu

@@ -110,6 +110,10 @@ The form lets you configure the project directory, Python package, repository UR
 
 Press Enter to accept each displayed default or enter a custom value. Project directory names may contain dashes, such as `my-study`. Use a valid Python import name for the package, such as `my_study`.
 
+#### Optional utilities module (unreleased)
+
+The development version of the installable template adds "Include utils.py?" (`include_utils`), defaulting to `yes`. Select `no` to omit `utils.py` and its import from the starter notebook. You can add your own Python modules to the package at any time. The fixed 1.0.4 command above still includes `utils.py`; its setup prompts are shown above.
+
 #### Install the package
 
 From the generated project directory, activate your environment and install your package in editable mode. Editable installation lets you change the package code without reinstalling it. Restart the notebook kernel or reload affected modules to use changes to code already imported.
