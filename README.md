@@ -13,14 +13,14 @@ Share the study on GitHub, including documentation and shareable data or data
 retrieval instructions. See the generated README and the
 [project introduction](https://github.com/adamjpatterson/the-data-science-project/blob/main/INTRODUCTION.md).
 
-## Release 1.0.4
+## Release 1.1.0
 
 ```bash
 python -m pip install cookiecutter
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.0.4
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.1.0
 ```
 
-These commands select the fixed 1.0.4 release. This branch contains ongoing development.
+These commands select the fixed 1.1.0 release. This branch contains ongoing development.
 
 ## Optional AI guidance
 
@@ -29,9 +29,8 @@ generated project's `AGENTS.md`. The remaining project files are unchanged.
 
 Setup uses readable prompt labels.
 
-## Optional utilities module (unreleased)
+## Optional utilities module
 
 Select `no` for "Include utils.py?" to omit the starter utilities module and its
 notebook import. The `include_utils` option defaults to `yes`. You can add your
-own modules to the package regardless of this choice. Release 1.0.4 always
-includes `utils.py`.
+own modules to the package regardless of this choice.
