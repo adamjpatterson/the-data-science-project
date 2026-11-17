@@ -64,7 +64,7 @@ You can [create an installable project using the Cookiecutter](#create-an-instal
     │       │
     │       ├── __main__.py ⬅ Define your package's pipeline here.
     │       │
-    │       └── utils.py ⬅ Put reusable Python functions here.
+    │       └── utils.py ⬅ Optional starter module for reusable Python functions.
     │
     ├── results ⬅ Put your study's outputs here; organize them for your study.
     │   │
@@ -90,19 +90,23 @@ python -m pip install cookiecutter
 Use the Cookiecutter to create an installable IMRaD-like project.
 
 ```bash
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.0.4
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.1.0
 ```
 
 The form lets you configure the project directory, Python package, repository URL, description, and author information:
 
 ```text
-[1/7] Project directory name (project):
-[2/7] Python package name (package):
-[3/7] Repository URL (https://github.com/pypa/sampleproject):
-[4/7] Package description (A small example package):
-[5/7] Author name (Example Author):
-[6/7] Author email (author@example.com):
-[7/7] Include AGENTS.md guidance?
+[1/8] Project directory name (project):
+[2/8] Python package name (package):
+[3/8] Repository URL (https://github.com/pypa/sampleproject):
+[4/8] Package description (A small example package):
+[5/8] Author name (Example Author):
+[6/8] Author email (author@example.com):
+[7/8] Include AGENTS.md guidance?
+    1 - yes
+    2 - no
+    Choose from [1/2] (1):
+[8/8] Include utils.py?
     1 - yes
     2 - no
     Choose from [1/2] (1):
@@ -110,9 +114,9 @@ The form lets you configure the project directory, Python package, repository UR
 
 Press Enter to accept each displayed default or enter a custom value. Project directory names may contain dashes, such as `my-study`. Use a valid Python import name for the package, such as `my_study`.
 
-#### Optional utilities module (unreleased)
+#### Optional utilities module
 
-The development version of the installable template adds "Include utils.py?" (`include_utils`), defaulting to `yes`. Select `no` to omit `utils.py` and its import from the starter notebook. You can add your own Python modules to the package at any time. The fixed 1.0.4 command above still includes `utils.py`; its setup prompts are shown above.
+The "Include utils.py?" option (`include_utils`) defaults to `yes`. Select `no` to omit `utils.py` and its import from the starter notebook. You can add your own Python modules to the package at any time.
 
 #### Install the package
 
@@ -124,7 +128,7 @@ python -m pip install -e .
 
 #### Run a notebook
 
-Open `methods/main.ipynb` in the same environment. Its first cell imports the four path constants and `utils` from your configured package.
+Open `methods/main.ipynb` in the same environment. Its first cell imports the four path constants from your configured package, plus `utils` if you chose to include it.
 
 #### Add dependencies to your project
 
@@ -136,7 +140,7 @@ Editable installation makes the package's utilities and path constants importabl
 
 ```python
 from package import PROJECT_ROOT, MATERIALS_PATH, METHODS_PATH, RESULTS_PATH
-from package import utils
+from package import utils  # If you included utils.py.
 ```
 
 Replace `package` with your configured package name. The constants in `__init__.py` are simple definitions based on the generated source layout:
@@ -227,7 +231,7 @@ python -m pip install cookiecutter
 Use the Cookiecutter to create an IMRaD-like project.
 
 ```bash
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout imrad-project-v1.0.4
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout imrad-project-v1.1.0
 ```
 
 This template asks only for the project directory name and optional AI guidance:
@@ -292,7 +296,7 @@ The contents and subdirectories depend on the study.
 
 ## Release
 
-The current published template release is **1.0.4**. Use the Cookiecutter commands above to create a study from that fixed release.
+The current published template release is **1.1.0**. Use the Cookiecutter commands above to create a study from that fixed release.
 
 For contributors working on the templates themselves, `installable_imrad_project_cookiecutter` contains the installable template and `imrad_project_cookiecutter` contains the simpler template. These branches hold the latest template changes, which may not yet be released. The `main` branch contains the shared documentation and tests.
 
