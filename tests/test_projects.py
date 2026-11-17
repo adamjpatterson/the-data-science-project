@@ -1,4 +1,5 @@
 """Integration checks for the repository's two Cookiecutter templates."""
+from email.parser import Parser
 import os
 from pathlib import Path
 import shutil
@@ -154,6 +155,7 @@ def test_installable_distribution(sources, tmp_path, variant):
         assert (project / name / "README.md").is_file()
         assert not (project / name / "__init__.py").exists()
     assert (project / "methods" / package / "__init__.py").is_file()
+    assert not (project / "__about__.py").exists()
     study_files = {
         "materials/input.csv": "synthetic input\n",
         "results/output.csv": "synthetic output\n",
@@ -171,10 +173,11 @@ def test_installable_distribution(sources, tmp_path, variant):
     with tarfile.open(sdist) as archive:
         names = {"/".join(Path(member.name).parts[1:])
                  for member in archive.getmembers() if member.isfile()}
-        assert {"pyproject.toml", "README.md", "__about__.py", "PKG-INFO"} <= names
+        assert {"pyproject.toml", "README.md", "PKG-INFO"} <= names
         assert f"methods/{package}/__init__.py" in names
+        assert f"methods/{package}/__about__.py" in names
         # Hatchling also preserves .gitignore to reproduce file selection.
-        assert all(name in {"pyproject.toml", "README.md", "__about__.py", "PKG-INFO", ".gitignore"}
+        assert all(name in {"pyproject.toml", "README.md", "PKG-INFO", ".gitignore"}
                    or name.startswith(f"methods/{package}/") for name in names), names
     for name, content in study_files.items():
         assert (project / name).read_text() == content
@@ -184,6 +187,13 @@ def test_installable_distribution(sources, tmp_path, variant):
         names = archive.namelist()
         assert f"{package}/__init__.py" in names
         assert f"{package}/__main__.py" in names
+        assert f"{package}/__about__.py" in names
+        version_source = archive.read(f"{package}/__about__.py").decode()
+        metadata_name, = (name for name in names if name.endswith(".dist-info/METADATA"))
+        metadata = Parser().parsestr(archive.read(metadata_name).decode())
+        version_namespace = {}
+        exec(version_source, version_namespace)
+        assert metadata["Version"] == version_namespace["__version__"] == "0.0.1"
         assert all(name.startswith((package + "/",)) or ".dist-info/" in name for name in names)
         assert not any(name.endswith((".ipynb", ".pkl", ".data")) for name in names)
         assert not any(name.startswith(f"{package}/{section}/") for name in names

@@ -3,7 +3,8 @@
 CI checks both templates on pushes and pull requests to their development
 branches and `main`. It also runs weekly and can be started manually on `main`.
 It renders projects, executes notebooks, verifies editable imports and source-layout
-paths, and checks that package archives exclude study files. Tests also cover
+paths, and checks that package archives include the package version module
+and exclude study files. Tests also cover
 custom names, metadata escaping, and optional `AGENTS.md` guidance.
 
 The test runner uses Python 3.11; generated projects are built, installed, and
