@@ -19,12 +19,12 @@ Open `methods/main.ipynb` in the same environment. Its first cell uses:
 
 ```python
 from {{cookiecutter.package_name}} import PROJECT_ROOT, MATERIALS_PATH, METHODS_PATH, RESULTS_PATH
-from {{cookiecutter.package_name}} import utils
-```
+{% if cookiecutter.include_utils == "yes" %}from {{cookiecutter.package_name}} import utils
+{% endif %}```
 
 The four constants in `__init__.py` derive absolute paths from the package's
 location in this source layout. They do not create or validate directories.
-Put reusable functions in `utils.py` or add modules as the study grows.
+{% if cookiecutter.include_utils == "yes" %}Put reusable functions in `utils.py` or add modules as the study grows.{% else %}Add Python modules to the package as the study grows.{% endif %}
 
 Run `python -m {{cookiecutter.package_name}}` to call the starter `main()` in
 `__main__.py`. It does nothing until you add your workflow. Define any arguments

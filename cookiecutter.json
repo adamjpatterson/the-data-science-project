@@ -9,6 +9,10 @@
         "yes",
         "no"
     ],
+    "include_utils": [
+        "yes",
+        "no"
+    ],
     "__prompts__": {
         "project_name": "Project directory name",
         "package_name": "Python package name",
@@ -16,6 +20,7 @@
         "package_description": "Package description",
         "author_name": "Author name",
         "author_email": "Author email",
-        "include_agents_md": "Include AGENTS.md guidance?"
+        "include_agents_md": "Include AGENTS.md guidance?",
+        "include_utils": "Include utils.py?"
     }
 }

@@ -5,7 +5,7 @@ project root. Organize their contents to suit your study. Reusable Python code
 lives in `methods/package` by default; `package_name` is configurable.
 
 After cloning a generated study, run `python -m pip install -e .` in its root.
-Import its path constants and `utils` from the configured package. Define a
+Import its path constants and any reusable modules from the configured package. Define a
 workflow in the starter `main()` in `__main__.py`, then run it with
 `python -m <package_name>`. Notebooks run separately.
 
@@ -28,3 +28,10 @@ The `include_agents_md` choice defaults to `yes`. Select `no` to omit the
 generated project's `AGENTS.md`. The remaining project files are unchanged.
 
 Setup uses readable prompt labels.
+
+## Optional utilities module (unreleased)
+
+Select `no` for "Include utils.py?" to omit the starter utilities module and its
+notebook import. The `include_utils` option defaults to `yes`. You can add your
+own modules to the package regardless of this choice. Release 1.0.4 always
+includes `utils.py`.
