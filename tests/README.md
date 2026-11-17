@@ -10,8 +10,10 @@ the installable project without the optional `utils.py` module.
 
 The test runner uses Python 3.11; generated projects are built, installed, and
 executed in fresh environments using Python 3.8, 3.11, 3.13, and 3.14 on Ubuntu
-24.04. This does not establish Windows or every intermediate Python version's
-compatibility. Source templates and their notebook outputs are never modified.
+24.04, plus Python 3.13 on Windows Server 2025 and macOS 15 (Apple Silicon).
+The same suite runs on all six configurations. Other OS, architecture, and Python
+combinations are not covered. Source templates and their notebook outputs are
+never modified.
 
 <details>
 <summary>Run tests locally</summary>
@@ -23,6 +25,15 @@ network access to install dependencies. Make sure `python` selects that version:
 python -m venv /tmp/data-science-project-tests
 /tmp/data-science-project-tests/bin/python -m pip install -r tests/requirements.txt
 /tmp/data-science-project-tests/bin/python -m pytest -v tests
+```
+
+On Windows, use PowerShell from the repository root with Python 3.11.4 or newer:
+
+```powershell
+$testEnv = Join-Path $env:TEMP "data-science-project-tests"
+python -m venv $testEnv
+& "$testEnv\Scripts\python.exe" -m pip install -r tests/requirements.txt
+& "$testEnv\Scripts\python.exe" -m pytest -v tests
 ```
 
 Tests use local `origin/*` refs for the two template branches, falling back to
@@ -95,6 +106,9 @@ git archive installable-imrad-project-v1.1.0 | tar -x -C "$release_sources/insta
 git archive imrad-project-v1.1.0 | tar -x -C "$release_sources/imrad_project_cookiecutter"
 PROJECT_TEST_SOURCES="$release_sources" /tmp/data-science-project-release-tests/bin/python -m pytest -v tests
 ```
+
+The fixed 1.1.0 release contains the earlier Linux/macOS test runner; Windows
+support for the test runner was added afterward on `main`.
 
 Dependencies are resolved at test time; the release does not include a lockfile
 for third-party packages.

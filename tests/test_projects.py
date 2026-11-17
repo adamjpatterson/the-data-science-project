@@ -22,7 +22,8 @@ BRANCHES = (
 def run(*args, cwd, env=None):
     result = subprocess.run(
         [str(arg) for arg in args], cwd=cwd, env=env,
-        text=True, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=300,
+        text=True, encoding="utf-8", errors="replace",
+        stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=300,
     )
     assert result.returncode == 0, result.stdout
     return result.stdout
@@ -80,11 +81,12 @@ def environment(tmp_path):
     root = tmp_path / "venv"
     target = os.environ.get("PROJECT_TEST_PYTHON", sys.executable)
     run(target, "-m", "venv", root, cwd=tmp_path)
-    python = root / "bin/python"
+    scripts = root / ("Scripts" if os.name == "nt" else "bin")
+    python = scripts / ("python.exe" if os.name == "nt" else "python")
     env = dict(os.environ)
     env.pop("PYTHONPATH", None)
     env.pop("PYTHONHOME", None)
-    env["PATH"] = f"{root / 'bin'}{os.pathsep}{env.get('PATH', '')}"
+    env["PATH"] = f"{scripts}{os.pathsep}{env.get('PATH', '')}"
     env["JUPYTER_PATH"] = str(root / "share/jupyter")
     env["JUPYTER_CONFIG_DIR"] = str(tmp_path / "jupyter-config")
     env["IPYTHONDIR"] = str(tmp_path / "ipython")
@@ -184,7 +186,7 @@ def test_installable_distribution(sources, tmp_path, variant):
         assert all(name in {"pyproject.toml", "README.md", "PKG-INFO", ".gitignore"}
                    or name.startswith(f"methods/{package}/") for name in names), names
     for name, content in study_files.items():
-        assert (project / name).read_text() == content
+        assert (project / name).read_text(encoding="utf-8") == content
     wheel, = distributions.glob("*.whl")
     assert stale_wheel.read_bytes() == b"previous build artifact"
     with zipfile.ZipFile(wheel) as archive:
@@ -228,7 +230,7 @@ def test_template_metadata_round_trip(sources, tmp_path, value):
         ("author_name", "author_email", "package_description", "repository_url"), value,
     )
     project, _ = render(sources, tmp_path, "installable_imrad_project_cookiecutter", False, context)
-    metadata = tomllib.loads((project / "pyproject.toml").read_text())["project"]
+    metadata = tomllib.loads((project / "pyproject.toml").read_text(encoding="utf-8"))["project"]
     assert metadata["authors"] == [{"name": value, "email": value}]
     assert metadata["description"] == value
     assert metadata["urls"] == {"Homepage": value, "Issues": value + "/issues"}
