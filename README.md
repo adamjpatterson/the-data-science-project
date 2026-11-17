@@ -13,6 +13,11 @@ Share the study on GitHub, including documentation and shareable data or data
 retrieval instructions. See the generated README and the
 [project introduction](https://github.com/adamjpatterson/the-data-science-project/blob/main/INTRODUCTION.md).
 
+## Unreleased — planned for 1.0.4
+
+The package version file now lives in `methods/<package_name>/__about__.py`
+instead of the study root and is included in the installed package.
+
 ## Release 1.0.3
 
 ```bash

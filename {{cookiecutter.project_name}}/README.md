@@ -35,7 +35,8 @@ For data kept elsewhere, document how to obtain it. Readers can clone the study
 and install it in editable mode. A standalone wheel does not contain the study
 folders; these source-layout path constants are intended for editable use.
 
-The generated package starts at version `0.0.1`, recorded in `__about__.py`.
+The generated package starts at version `0.0.1`, recorded in
+`methods/{{cookiecutter.package_name}}/__about__.py`.
 Manage that version independently of the template release. Before publishing
 your package, choose its license and add the corresponding file and metadata.
 
