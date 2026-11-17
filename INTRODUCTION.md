@@ -41,8 +41,6 @@ You can [create an installable project using the Cookiecutter](#create-an-instal
 
 #### The directory structure looks like this.
 
-The directory tree below reflects development toward **1.0.4**, which moves `__about__.py` from the study root into `methods/<package_name>/`. The fixed 1.0.3 commands still generate the file at the study root.
-
 ```text
 ├── project ⬅ This is the project directory. Choose a name for your project.
     │
@@ -92,7 +90,7 @@ python -m pip install cookiecutter
 Use the Cookiecutter to create an installable IMRaD-like project.
 
 ```bash
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.0.3
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout installable-imrad-project-v1.0.4
 ```
 
 The form lets you configure the project directory, Python package, repository URL, description, and author information:
@@ -225,7 +223,7 @@ python -m pip install cookiecutter
 Use the Cookiecutter to create an IMRaD-like project.
 
 ```bash
-cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout imrad-project-v1.0.3
+cookiecutter https://github.com/adamjpatterson/the-data-science-project.git --checkout imrad-project-v1.0.4
 ```
 
 This template asks only for the project directory name and optional AI guidance:
@@ -290,11 +288,11 @@ The contents and subdirectories depend on the study.
 
 ## Release
 
-The current published template release is **1.0.3**. Use the Cookiecutter commands above to create a study from that fixed release.
+The current published template release is **1.0.4**. Use the Cookiecutter commands above to create a study from that fixed release.
 
 For contributors working on the templates themselves, `installable_imrad_project_cookiecutter` contains the installable template and `imrad_project_cookiecutter` contains the simpler template. These branches hold the latest template changes, which may not yet be released. The `main` branch contains the shared documentation and tests.
 
-Generated packages have their own version, initially `0.0.1` in `__about__.py`. Study authors manage that version independently of the template release.
+Generated packages have their own version, initially `0.0.1` in `methods/<package_name>/__about__.py`. Study authors manage that version independently of the template release.
 
 ## Development checks
 
